@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Base/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'Base/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'Base/css/article.cs' %}s">
+    <script src="{% static 'Base/JS/nav.js' %}" ></script>
+    <title>Article</title>
+
+</head>
+<body>
+    <nav id="site-header">
+        <div>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'Base/Images/logo.png' %}" alt="">
+            </a>
+            
+        </div>
+        <div class="links">
+            <a href="{% url 'tech' %}">Tech</a>
+            <a href="{% url 'programming' %}">Programming</a>
+            <a href="{% url 'cyber' %}">Cyber</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="article">
+           
+            <div>
+                <h1>{{article.title}}</h1>
+                <p>{{article.created|timesince}} ago</p>
+                <p>{{article.article|safe}}</p>
+            </div>
+            
+           
+            <div class="similar mobile">
+                <div>
+                    <h1>Similar</h1>
+                
+                </div>
+
+                <div class="content-container">
+                    {% for similar_article in similar_articles %}
+                    <div class="content">
+                        <div class="img-container">
+                            <img src="{{ similar_article.thumbnail.url }}"  alt="">
+                        </div>
+                        <div>
+                            <p>{{similar_article.title}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+    
+                    
+                </div>
+
+                
+            </div>
+            
+        </div>
+        <div class="sidebar">
+            <div>
+                <h1>Similar</h1>
+            </div>
+           
+            <div class="side-articles">
+                {% for article in similar_articles %}
+                <div class="side-artcontainer">
+                    <div class="side-article">
+                        <div class="img-container">
+                            <a href="{% url 'article' article.pk %}">
+                                <img src="{{ article.thumbnail.url }}" alt="">
+                            </a>
+                            
+                        </div>
+                        
+                    </div>
+                    <div><p>{{article.title}}</p></div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </main>
+
+    <footer>
+		<div>
+			<div></div>
+            <img src="{% static 'Base/Images/insta.webp' %}" alt="">
+            <img src="{% static 'Base/Images/fb.webp' %}" alt="">
+            <img src="{% static 'Base/Images/tiktok.webp' %}" alt="">
+            <img src="{% static 'Base/Images/yt.webp' %}" alt="">
+		</div>
+
+		<div>
+			<p></p>
+		</div>
+		
+	</footer>
+
+
+</body>
+</html>

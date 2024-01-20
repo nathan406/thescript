@@ -1,0 +1,236 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;900&family=VT323&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    animation: bg 10s  infinite;
+    color: white;
+    font-family: 'Source Code Pro', monospace;
+    /* font-family: 'VT323', monospace; */
+}
+@keyframes bg {
+    0% {
+      background-color: rgb(63, 56, 56);
+    }
+   
+    100%{
+      background-color: black;
+    }
+  }
+  a{
+    cursor: pointer;
+  }
+
+  h1{
+    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+    color: white;
+  }
+  p{
+    font-size: calc(0.8vh + 0.8vw);
+  }
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: calc(0.5vh + 0.5vw);
+    /* gap: calc(3vh + 3vw); */
+    margin-bottom: calc(5vh + 5vw);
+}
+
+main .article {
+    width: calc(40vh + 40vw);
+}
+
+
+
+main .article p{
+    font-size: calc(1vh + 1vw);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    /* position: fixed; */
+    margin-top: calc(5vh + 5vw);
+    /* margin-right: calc(1vh + 1vw); */
+    top: 0.5; /* Adjust the top position as needed */
+    right: 0;
+    width: calc(14vh + 14vw);
+    gap: calc(1vh + 1vw);
+    /* background-color: rgb(43, 42, 42); */
+    height: calc(40vh + 40vw);
+    overflow-y: hidden; /* Add scroll if content overflows */
+    overflow-x: hidden;
+    color: white;
+    
+    padding: calc(1vh + 1vw);
+}
+
+.article .mobile{
+  display: none ;
+}
+
+@media screen and (max-width: 900px){
+  .main .article{
+    margin-left: calc(3vh + 3vw);
+  }
+}
+
+@media screen and (max-width: 850px) {
+     main .article{
+        margin-left: 0;
+        margin-top: calc(5vh + 5vw);
+    }
+    .sidebar{
+        display: none;
+    }
+    .article .mobile{
+        display: contents ;
+    }
+
+    .similar{
+      display: flex !important;
+      flex-direction: column;
+      
+      /* width: calc(20vh + 20vw); */
+  }
+  .content-container{
+    display: flex;
+    gap: calc(3vh + 3vw);
+    flex-wrap: wrap;
+  }
+  
+  .content-container .content{
+    width: calc(10vh + 10vw);
+    justify-content: center;
+    align-items: center;
+    
+    flex-wrap: wrap;
+  }
+
+    .content-container .content img{
+      width: calc(10vh + 10vw);
+      height: calc(6vh + 6vw);
+    }
+
+
+
+    .content-container .content p{
+      font-size: calc(1vh + 1vw) ;
+
+    }
+
+   
+}
+
+
+
+@media screen and (max-width: 500px) {
+    
+    main .article{
+        width: calc(30vh + 30vw);
+    }
+}
+
+.sidebar .side-articles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: calc(2vh + 2vw);
+}
+
+
+.side-artcontainer{
+    display: flex;
+    /* flex-direction: column; */
+    gap: calc(1vh + 1vw);
+    justify-content: center;
+    align-items: center;
+    padding-left: calc(1vh + 1vw) !important;
+    width: 100%;
+}
+
+.sidebar .side-article{
+    width: calc(6vh + 6vw);
+    height: calc(3vh + 3vw);
+}
+
+.sidebar .side-article .img-container{
+  width: calc(6vh + 6vw);
+}
+
+.sidebar .side-article img{
+    width: calc(5vh + 5vw);
+    
+}
+
+
+/* glitch effect*/
+
+  
+  .img-container{
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .img-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: 1;
+    opacity: 0.5;
+    animation: glitch 5s infinite linear alternate-reverse, glitch-anim-flash 5s infinite;
+  }
+  
+  @keyframes glitch {
+    0% {
+      clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+    }
+    5% {
+      clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+    }
+    10% {
+      clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+    }
+    15% {
+      clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+    }
+    20% {
+      clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+    }
+    25% {
+      clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+    }
+    30% {
+      clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+    }
+    35% {
+      clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+    }
+    40%, 100% {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+  
+  @keyframes glitch-anim-flash {
+    0% {
+      opacity: 0.2;
+    }
+    20% {
+        opacity: 0.1;
+      }
+    30%, 100% {
+      opacity: 0;
+    }
+  }
+  

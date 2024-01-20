@@ -1,0 +1,182 @@
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+
+
+a {
+    text-decoration: none;
+    
+}
+
+nav {
+    background-color: rgba(255, 0, 0, 0); /* Initially transparent */
+    transition: background-color 0.3s ease;
+    z-index: 3;
+    top: 0;
+    position: fixed;
+    height: calc(4vh + 4vw);
+    width: 100%;
+    padding-left: calc(1vh + 1vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+/* @keyframes fadeInOut {
+    0% {
+        background-color: rgba(255, 0, 0, 0);
+      }
+      10% {
+        background-color: rgba(255, 0, 0, 0.068);
+      }
+      20% {
+        background-color: rgba(255, 0, 0, 0.212);
+      }
+      30% {
+        background-color: rgba(255, 0, 0, 0.384);
+      }
+      40% {
+        background-color: rgba(255, 0, 0, 0.479);
+      }
+      50% {
+        background-color: rgba(255, 0, 0, 0.555);
+      }
+      60% {
+        background-color: rgba(255, 0, 0, 0.603);
+      }
+      70% {
+        background-color: rgba(255, 0, 0, 0.664);
+      }
+      80% {
+        background-color: rgba(255, 0, 0, 0.705);
+      }
+      90% {
+        background-color: rgba(255, 0, 0, 0.753);
+      }
+      100% {
+        background-color: rgba(255, 0, 0, 1);
+      }
+  } */
+  
+
+nav a{
+  color: rgb(243, 176, 176);
+}
+
+nav img {
+    width: calc(3vh + 3vw);
+}
+
+nav .links {
+    display: flex;
+    gap: calc(1vh + 1vw);
+    padding: calc(2vh + 2vw);
+    font-size: calc(1vh + 1vw);
+}
+
+/* .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(5vh + 5vw); 
+} */
+
+.intro {
+    height: 100vh;
+    position: relative; /* Set position to relative */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.intro img {
+    width: calc(20vh + 20vw);
+    position: fixed; /* Set position to fixed */
+    top: 50%; /* Center the image vertically */
+    left: 50%; /* Center the image horizontally */
+    transform: translate(-50%, -50%);
+    animation: fadeInOut 10s infinite;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.main {
+    position: relative; /* Set position to relative */
+    z-index: 2; /* Set a lower z-index than .intro */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.815);
+    color: white;
+
+}
+
+.main .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} 
+
+.main .container .category{
+    display: flex;
+    justify-content: space-evenly;
+    gap: calc(25vh + 25vw);
+    align-items: center;
+    color: red;
+}
+
+.main .container .category a{
+    color: rgba(255, 0, 0, 0.74);
+}
+
+
+
+
+.articles{
+    display: flex;
+    gap: calc(5vh + 5vw);
+    margin-bottom: calc(5vh + 5vw);
+}
+
+
+
+.article{
+    box-shadow: 4px 4px 8px 9px rgba(253, 253, 253, 0.1);
+    padding: calc(2vh + 2vw);
+    height: calc( 18vh + 18vw);
+    width: calc(15vh + 15vw);
+    position: relative;
+    background-color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-img img{
+    width: 100%;
+}
+
+.article h3{
+   
+    color: red;
+    font-size: calc(1.5vh + 1.5vw);
+}
+
+.centered{
+    position: absolute;
+}
