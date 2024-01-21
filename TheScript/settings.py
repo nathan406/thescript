@@ -16,6 +16,9 @@ import socket
 import dj_database_url 
 from django.http import HttpRequest
 from urllib.parse import quote
+import mimetypes
+
+mimetypes.add_type("text/javascript", ".js", True)
 
 
 hostname = socket.gethostname()
@@ -171,7 +174,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'assets'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
