@@ -34,9 +34,9 @@ SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@(
 #     DEBUG = False  # Production environment
 # DEBUG = True
 
-if socket.gethostname() == "https://thescript.onrender.com/":
+if socket.gethostname() == 'thescript.onrender.com':
     DEBUG = False
-    ALLOWED_HOSTS = ["https://thescript.onrender.com/",]
+    ALLOWED_HOSTS = ['thescript.onrender.com',]
     ...
 else:
     DEBUG = True
