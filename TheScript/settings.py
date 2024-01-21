@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import socket
+from django.http import HttpRequest
 
 
 hostname = socket.gethostname()
@@ -34,13 +35,15 @@ SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@(
 #     DEBUG = False  # Production environment
 # DEBUG = True
 
-if socket.gethostname() == 'thescript.onrender.com':
+from django.http import HttpRequest
+
+if HttpRequest().get_host() == 'thescript.onrender.com':
     DEBUG = False
     ALLOWED_HOSTS = ['thescript.onrender.com']
-   
 else:
     DEBUG = True
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
 
 # ALLOWED_HOSTS = ['','127.0.0.1','localhost']
 
