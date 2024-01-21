@@ -38,7 +38,10 @@ SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@(
 #     DEBUG = True  # Development environment
 # else:
 #     DEBUG = False  # Production environment
-DEBUG = True
+if os.environ.get('DJANGO_SETTINGS_MODULE') == 'production':
+    DEBUG = False
+else:
+    DEBUG = True
 
 
 
