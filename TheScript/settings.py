@@ -37,15 +37,15 @@ SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@(
 
 
 
-if HttpRequest().get_host() == 'thescript.onrender.com':
-    DEBUG = False
-    ALLOWED_HOSTS = ['thescript.onrender.com']
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+# if HttpRequest().get_host() == 'thescript.onrender.com':
+#     DEBUG = False
+#     ALLOWED_HOSTS = ['thescript.onrender.com']
+# else:
+#     DEBUG = True
+#     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
-# ALLOWED_HOSTS = ['','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['thescript.onrender.com','127.0.0.1','localhost']
 
 
 # Application definition
