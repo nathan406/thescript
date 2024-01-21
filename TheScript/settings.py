@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import socket
+import dj_database_url 
 from django.http import HttpRequest
+from urllib.parse import quote
 
 
 hostname = socket.gethostname()
@@ -98,12 +100,40 @@ WSGI_APPLICATION = 'TheScript.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Your password
+password = "TheScript.2404"
+
+# Percent-encode the password
+encoded_password = quote(password)
+
+# Construct the connection string
+connection_string = f"postgres://postgres.gyuxjtoltljhfuguvtlv:{encoded_password}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
+
+# Set the DATABASE_URL environment variable
+os.environ["DATABASE_URL"] = connection_string
+
+# Use dj_database_url to parse the connection string
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
+
+# DATABASES = {
+#     'default':{
+#         'ENGINE':'django.db.backends.postgresql_psycopg2',
+#         'NAME': "postgres",
+#         'USER': "postgres",
+#         'PASSWORD':"Amtx8CaYDwuhcsRH",
+#         'HOST': "db.gyuxjtoltljhfuguvtlv.supabase.co",
+#         'PORT':"5432"
+#     }
+# }
 
 
 # Password validation
