@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;900&family=VT323&display=swap');
+
+body{
+	margin: 0;
+	padding: 0;
+	background-color: black;
+    height: 100vh;
+  animation: bg 10s  infinite;
+  transition: bg 5s;
+  font-family: 'Source Code Pro', monospace;
+}
+
+a{
+  cursor: pointer;
+}
+
+h1,p{
+  padding: 0;
+  margin: 0;
+}
+
+h1{
+  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+  color: white;
+}
+
+p{
+  color: gray;
+}
+
+@keyframes bg {
+  0% {
+    background-color: rgb(63, 56, 56);
+  }
+ 
+  100%{
+    background-color: black;
+  }
+}
+
+
+ .container{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  gap: calc(2vh + 2vw);
+  margin-bottom: calc(5vh + 5vw);
+  margin-top: calc(5vh + 5vw);
+}
+
+ .category{
+  display: flex;
+  gap: calc(15vh + 15vw);
+  /* margin-left: calc(5vh +5vw) !important; */
+}
+
+ .category .btn{
+  background-color: white;
+  border-radius: calc(1vh + 1vw);
+  border-width: 2px;
+  border-color: red;
+
+}
+
+ .articles {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 1 1;
+  row-gap: calc(5vh + 5vw) !important;
+  justify-content: center;
+  align-items: center;
+  gap: calc(1vh + 1vw);
+}
+
+ .art-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(17vh + 17vw);
+  height: calc(18vh + 18vw);
+  justify-content: flex-start; /* Align items to the start (top) */
+  align-items: left;
+  gap: calc(0.5vh + 0.5vw);
+}
+
+ .art-container h1 {
+  font-size: calc(1.2vh + 1.2vw);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  max-width: calc(15vh + 15vw);
+  /* max-height: calc(15vh + 15vw); */
+  overflow: hidden; /* Hide overflowing text */
+}
+
+.art-container p{
+  font-size: calc(1vh + 1vw);
+}
+ .article {
+  width: calc(15vh + 15vw);
+  height: calc(10vh + 10vw);
+  /* border: 2px solid red; */
+  /* background-color: white; */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+ .article img {
+  width: 100%; /* Make the image fill its container */
+  height: calc(10vh + 10vw);
+}
+
