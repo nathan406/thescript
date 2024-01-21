@@ -20,7 +20,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    margin-bottom: calc(5vh + 5vw);
 }
 
 nav a{

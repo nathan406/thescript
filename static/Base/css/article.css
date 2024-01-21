@@ -1,6 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;900&family=VT323&display=swap');
 
+html{
+  width: 100%;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -9,6 +13,8 @@ body{
     color: white;
     font-family: 'Source Code Pro', monospace;
     /* font-family: 'VT323', monospace; */
+    
+
 }
 @keyframes bg {
     0% {
@@ -26,11 +32,17 @@ body{
   h1{
     text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
     color: white;
+    font-size: calc(1.2vh + 1.2vw);
   }
   p{
     font-size: calc(0.8vh + 0.8vw);
   }
 
+/* body .container{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: calc(5vh + 5vw);
+} */
 main{
     display: flex;
     justify-content: center;
@@ -38,10 +50,15 @@ main{
     margin-top: calc(0.5vh + 0.5vw);
     /* gap: calc(3vh + 3vw); */
     margin-bottom: calc(5vh + 5vw);
+    padding-bottom: calc(5vh + 5vw);
+    flex-grow: 1; /* Take up remaining vertical space */
+    height: 100%; 
+
 }
 
 main .article {
     width: calc(40vh + 40vw);
+    height: 100vh;
 }
 
 

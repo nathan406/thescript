@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import socket
+
+
+hostname = socket.gethostname()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +28,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# if hostname == 'localhost' or hostname == '127.0.0.1':
+#     DEBUG = True  # Development environment
+# else:
+#     DEBUG = False  # Production environment
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+if socket.gethostname() == "https://thescript.onrender.com/":
+    DEBUG = False
+    ALLOWED_HOSTS = ["https://thescript.onrender.com/",]
+    ...
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
+
+# ALLOWED_HOSTS = ['','127.0.0.1','localhost']
 
 
 # Application definition

@@ -1,15 +1,16 @@
 footer{
     background-color: rgb(22, 21, 21);
-    
+    /* margin-top: auto; */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     gap: calc(1vh + 1vw);
     height: calc(5vh + 5vw);
-    /* position: absolute; 
-    bottom: 0; */
+
+    bottom: 0;
     /* position: fixed; */
+    
 }
 
 footer img{
