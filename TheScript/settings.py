@@ -35,7 +35,7 @@ SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@(
 #     DEBUG = False  # Production environment
 # DEBUG = True
 
-from django.http import HttpRequest
+
 
 if HttpRequest().get_host() == 'thescript.onrender.com':
     DEBUG = False
