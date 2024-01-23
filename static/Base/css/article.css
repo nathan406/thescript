@@ -62,6 +62,14 @@ main .article {
     height: 100vh;
 }
 
+.article .post{
+  margin-top: calc(2vh + 2vh);
+}
+
+main .article .post img{
+  width: 100%;
+}
+
 
 
 main .article p{
@@ -93,6 +101,9 @@ main .article p{
   display: none ;
 }
 
+
+
+
 @media screen and (max-width: 900px){
   .main .article{
     margin-left: calc(3vh + 3vw);
@@ -103,14 +114,18 @@ main .article p{
      main .article{
         margin-left: 0;
         margin-top: calc(5vh + 5vw);
-        width: calc(30vh + 30vw);
+        width: 100%;
+        padding: calc(2vh + 2vw);
+       
         /* overflow-x: ; */
         /* max-width: calc(25vh + 25vw); */
         /* overflow-x: hidden; */
     }
-    main .article .body{
+    main .article .post img{
       width: 100%;
     }
+
+    
     .sidebar{
         display: none;
     }
@@ -154,14 +169,16 @@ main .article p{
 }
 
 
-
-@media screen and (max-width: 500px) {
-    
-    main .article{
-        /* width:  100%;
-        overflow-x: hidden; */
-    }
+@media screen and (max-width: 500px){
+  main .article  {
+    max-width:calc(40vh + 40vw) ;
+    padding: calc(1vh + 1vw);
+  }
+  main .article .post img{
+    width: 100% !important;
+  }
 }
+
 
 .sidebar .side-articles{
     display: flex;
