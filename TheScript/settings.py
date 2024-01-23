@@ -198,3 +198,10 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'  # define the path for uploaded media files
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+AWS_ACCESS_KEY_ID = 'AKIARS64NUXBYCRUXIZK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'thescriptbucket'
+AWS_QUERYSTRING_AUTH = False

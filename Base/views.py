@@ -21,12 +21,7 @@ def index(request):
     tech_articles = BlogArticle.objects.filter(category='tech')[:8]
     programming_articles = BlogArticle.objects.filter(category='programming')[:8]
     cyber_articles = BlogArticle.objects.filter(category='cyber')[:8]
-    slide = {
-        '1':1,
-        '2':2,
-        '3':3,
-        '4':4
-    }
+  
 
     return render(request, 'Base/Templates/index.html', {
         'popular_articles': popular_articles,
@@ -41,7 +36,6 @@ def index(request):
         'mobile_tech':mobile_tech,
         'mobile_programming':mobile_programming,
         'mobile_cyber':mobile_cyber,
-        'slide':slide,
     })
 
 def article(request, pk):
