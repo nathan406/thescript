@@ -17,6 +17,7 @@ import dj_database_url
 from django.http import HttpRequest
 from urllib.parse import quote
 import mimetypes
+from storages.backends.s3boto3 import S3Boto3Storage
 
 mimetypes.add_type("text/javascript", ".js", True)
 
