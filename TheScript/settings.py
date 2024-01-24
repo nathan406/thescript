@@ -54,7 +54,7 @@ else:
 #     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
-ALLOWED_HOSTS = ['thescript.onrender.com','127.0.0.1','localhost','thscript.site']
+ALLOWED_HOSTS = ['thescript.onrender.com','127.0.0.1','localhost','www.thscript.site']
 
 
 # Application definition
