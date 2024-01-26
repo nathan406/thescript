@@ -12,10 +12,10 @@ def index(request):
     # Dektop ###
 
     # Get popular articles
-    popular_articles = Popular.objects.order_by('-view_count')[:8]
+    popular_articles = Popular.objects.order_by('-view_count')[:6]
     
     # Get new articles
-    new_articles = BlogArticle.objects.order_by('-created')[:8]
+    new_articles = BlogArticle.objects.order_by('-created')[:6]
 
     # Get articles with categories
     tech_articles = BlogArticle.objects.filter(category='tech')[:8]
