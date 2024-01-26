@@ -2,9 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XZNNVRTSX5"></script>
 	<script>
 	window.dataLayer = window.dataLayer || [];
@@ -13,6 +10,10 @@
 
 	gtag('config', 'G-XZNNVRTSX5');
 	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Google tag (gtag.js) -->
+
     <title>programming</title>
   
     <link rel="stylesheet" href="{% static 'Base/css/footer.css' %}">
@@ -23,6 +24,13 @@
     <script src="{% static 'Base/js/nav.js' %}" defer></script>
 </head>
 <body>
+	<script type="text/javascript">
+		var uid = '472286';
+		var wid = '711096';
+		var pop_tag = document.createElement('script');pop_tag.src='//cdn.popcash.net/show.js';document.body.appendChild(pop_tag);
+		pop_tag.onerror = function() {pop_tag = document.createElement('script');pop_tag.src='//cdn2.popcash.net/show.js';document.body.appendChild(pop_tag)};
+	 </script>
+	 
     <nav id="site-header">
         <div>
             <a href="{% url 'home' %}">
