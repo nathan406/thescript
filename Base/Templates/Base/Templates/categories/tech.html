@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XZNNVRTSX5"></script>
 	<script>
 	window.dataLayer = window.dataLayer || [];
@@ -13,12 +12,13 @@
 	</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+	<!-- Google tag (gtag.js) -->
+
     <title>Tech</title>
   
     <link rel="stylesheet" href="{% static 'Base/css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'Base/css/glitch.css' %}">
-	<link rel="stylesheet" href="{% static 'Base/css/nav.css' %}">
+	<link rel="stylesheet" href="{% static 'Base/css/nav.css' %}">  
     <link rel="stylesheet" href="{% static 'Base/css/style.css' %}">
 
     <script src="{% static 'Base/js/nav.js' %}" defer></script>
@@ -33,17 +33,17 @@
 	 
     <nav id="site-header">
         <div>
-			<a href="{% url 'home' %}">
-				<img src="{% static 'Base/images/logo.png' %}" alt="">
-			</a>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'Base/images/logo.png' %}" alt="">
+            </a>
            
         </div>
         <div class="links">
             <!-- <a href="#categories">categories</a> -->
             <!-- <a href="#categories">services</a>
             <a href="#categories">about</a> -->
-			<!-- <a href="">Tech</a> -->
 			<a href="{% url 'programming' %}">Programming</a>
+			
 			<a href="{% url 'cyber' %}">Cyber</a>
         </div>
     </nav>
@@ -52,35 +52,30 @@
         <div class="container">
 			<div class="category">
 				<div>
-					<h1>Newest</h1>
+					<h1>Tech</h1>
 				</div>
-
+				
 				
 				
 			</div>
 
 			<div class="articles">
+				{% for article in  tech_articles %}
 				<div class="art-container">
-					{% for article in tech_articles %}
 					<div class="article">
 						<a href="{% url 'article' article.pk %}">
 							<img src="{{article.thumbnail.url}}" alt="">
 						</a>
+					
 						
 					</div>
 					<p>{{article.created|timesince}} ago</p>
 					<h1>
 						{{article.title}}
 					</h1>
-					{% endfor %}
-				</div>
-
-				
-				
+				</div>	
+				{% endfor %}
 			</div>
-			
-		
-			
 		</div>
     </div>
 

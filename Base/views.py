@@ -18,9 +18,9 @@ def index(request):
     new_articles = BlogArticle.objects.order_by('-created')[:6]
 
     # Get articles with categories
-    tech_articles = BlogArticle.objects.filter(category='tech')[:8]
-    programming_articles = BlogArticle.objects.filter(category='programming')[:8]
-    cyber_articles = BlogArticle.objects.filter(category='cyber')[:8]
+    tech_articles = BlogArticle.objects.filter(category='tech')[:9]
+    programming_articles = BlogArticle.objects.filter(category='programming')[:9]
+    cyber_articles = BlogArticle.objects.filter(category='cyber')[:9]
   
 
     return render(request, 'Base/Templates/index.html', {

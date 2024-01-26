@@ -76,9 +76,12 @@
 					<p class="category">{{article.category}}</p>
 					<p>{{article.created|timesince}} ago</p>
 					
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
+					
 				</div>
 				{%endfor%}
 				
@@ -154,9 +157,11 @@
 							<p>{{article.created|timesince}} ago</p>
 						</div>
 						<div>
-							<h1>
-								{{article.title}}
-							</h1>
+							<a href="{% url 'article' article.pk %}">
+								<h1>
+									{{article.title}}
+								</h1>
+							</a>
 						</div>
 						
 					</div>
@@ -198,9 +203,11 @@
 						</a>
 					</div>
 					<p>{{article.created|timesince}}ago</p>
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
 				</div>
 				{% endfor %}
 				
@@ -234,9 +241,11 @@
 						</a>
 					</div>
 					<p>{{article.created|timesince}} ago</p>
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
 				</div>
 				{% endfor %}
 				
@@ -278,9 +287,12 @@
 					<p class="category">{{article.category}}</p>
 					<p>{{article.created|timesince}} ago</p>
 					
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
+					
 				</div>
 				{%endfor%}
 				
@@ -360,9 +372,11 @@
 						<p>{{article.created|timesince}} ago</p>
 					</div>
 					<div>
-						<h1>
-							{{article.title}}
-						</h1>
+						<a href="{% url 'article' article.pk %}">
+							<h1>
+								{{article.title}}
+							</h1>
+						</a>
 					</div>
 					
 				</div>
@@ -401,9 +415,11 @@
 						</a>
 					</div>
 					<p>{{article.created|timesince}}ago</p>
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
 				</div>
 				{% endfor %}
 				
@@ -439,9 +455,11 @@
 						</a>
 					</div>
 					<p>{{article.created|timesince}} ago</p>
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
 				</div>
 				{% endfor %}
 				
