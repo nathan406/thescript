@@ -4,6 +4,7 @@
 html{
   margin: 0;
   padding: 0;
+  
 }
 
 body{
@@ -59,6 +60,7 @@ main{
 
 main .article {
     width: calc(40vh + 40vw);
+    margin-bottom: calc(5vh + 5vw);
     height: 100vh;
 }
 
