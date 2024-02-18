@@ -5,9 +5,27 @@ import dj_database_url
 from django.http import HttpRequest
 from urllib.parse import quote
 import mimetypes
+# from google.oauth2 import service_account
+# from storages.backends.s3boto3 import S3Boto3Storage
+
 from storages.backends.s3boto3 import S3Boto3Storage
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 mimetypes.add_type("text/javascript", ".js", True)
+
+
+
+# ... (existing code)
+
+# Initialize Firebase
+
+
+# Configure the storage bucket
+# FIREBASE_BUCKET = storage.bucket(app=firebase_admin.get_app(name='image_upload_app'))
 
 
 hostname = socket.gethostname()
@@ -119,6 +137,13 @@ DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
+# Set the path to the service account key file
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(BASE_DIR, 'key.json')
+
+
+
+
+
 # DATABASES = {
 #     'default':{
 #         'ENGINE':'django.db.backends.postgresql_psycopg2',
@@ -168,29 +193,34 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'assets'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
+# Define MEDIA_ROOT and other settings
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+UPLOAD_ROOT = '/media/upload'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.6.0.min.js'  # or use a local path
-CKEDITOR_UPLOAD_PATH = 'uploads/'  # define the path for uploaded media files
-
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+# Backblaze B2 configurations
+AWS_ACCESS_KEY_ID = '0050bf0f76bf18d0000000002'
+AWS_SECRET_ACCESS_KEY = 'K0058/HuAOAQsR0UZPz3sD+JLAidkY0'
+AWS_STORAGE_BUCKET_NAME = 'Thscript'
 
-AWS_ACCESS_KEY_ID = 'AKIARS64NUXBYCRUXIZK'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'thescriptbucket'
-AWS_QUERYSTRING_AUTH = False
+# Optional configurations
+AWS_S3_REGION_NAME = 'us-east-1'  
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.backblazeb2.com'
+
+# Optional: Set the location within the bucket
+AWS_LOCATION = 'static'
+
+# Static and media URLs
+STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+

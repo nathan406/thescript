@@ -1,27 +1,56 @@
-from django.shortcuts import render,get_object_or_404
-from .models import BlogArticle,Popular
+from django.shortcuts import render, get_object_or_404,redirect
+from .models import BlogArticle, Popular
+
+from django.http import HttpResponse
+import threading
+import pyrebase
+import environ
+
+import firebase_admin
+from firebase_admin import storage
+
+# Initialize Firebase app
+# firebase_admin.initialize_app()
+
+# from django.core.files.storage import default_storage
+# from django.core.files.base import ContentFile
+
+import os
+
+# from .forms import ImageUploadForm
+
+# def upload_image(request):
+#     if request.method == 'POST':
+#         form = ImageUploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('upload_success')
+#     else:
+#         form = ImageUploadForm()
+#     return render(request, 'upload_image.html', {'form': form})
+    
+# def upload_image_to_firebase(file_path, destination_path):
+#     # Access the storage object directly
+#     bucket = storage.bucket()
+
+#     # Upload the file
+#     blob = bucket.blob(destination_path)
+#     blob.upload_from_filename(file_path)
 
 def index(request):
-    # Mobile###
+    # Mobile
     mobile_popular = Popular.objects.order_by('-view_count')[:4]
     mobile_new = BlogArticle.objects.order_by('-created')[:4]
     mobile_tech = BlogArticle.objects.filter(category='tech')[:4]
     mobile_programming = BlogArticle.objects.filter(category='programming')[:4]
     mobile_cyber = BlogArticle.objects.filter(category='cyber')[:4]
 
-    # Dektop ###
-
-    # Get popular articles
+    # Desktop
     popular_articles = Popular.objects.order_by('-view_count')[:6]
-    
-    # Get new articles
     new_articles = BlogArticle.objects.order_by('-created')[:6]
-
-    # Get articles with categories
     tech_articles = BlogArticle.objects.filter(category='tech')[:9]
     programming_articles = BlogArticle.objects.filter(category='programming')[:9]
     cyber_articles = BlogArticle.objects.filter(category='cyber')[:9]
-  
 
     return render(request, 'Base/Templates/index.html', {
         'popular_articles': popular_articles,
@@ -29,27 +58,21 @@ def index(request):
         'tech_articles': tech_articles,
         'programming_articles': programming_articles,
         'cyber_articles': cyber_articles,
-        
-        # mobile
-        'mobile_new':mobile_new,
-        'mobile_popular':mobile_popular,
-        'mobile_tech':mobile_tech,
-        'mobile_programming':mobile_programming,
-        'mobile_cyber':mobile_cyber,
+
+        # Mobile
+        'mobile_new': mobile_new,
+        'mobile_popular': mobile_popular,
+        'mobile_tech': mobile_tech,
+        'mobile_programming': mobile_programming,
+        'mobile_cyber': mobile_cyber,
     })
 
 def article(request, pk):
-    # Retrieve the blog article based on the primary key (pk)
     article = get_object_or_404(BlogArticle, pk=pk)
-
-    # Increment the view count
     popular_instance, created = Popular.objects.get_or_create(article=article)
     popular_instance.view_count += 1
     popular_instance.save()
-
-    # Retrieve similar articles based on the category of the current article
     similar_articles = BlogArticle.objects.filter(category=article.category).exclude(pk=article.pk)[:3]
-
     return render(request, 'Base/Templates/article.html', {'article': article, 'view_count': popular_instance.view_count, 'similar_articles': similar_articles})
 
 def tech(request):
@@ -63,5 +86,3 @@ def programming(request):
 def cyber(request):
     cyber_articles = BlogArticle.objects.filter(category='cyber')[:50]
     return render(request, 'Base/Templates/categories/cyber.html', {'cyber_articles': cyber_articles})
-
-# Create your views here.

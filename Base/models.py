@@ -5,11 +5,13 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class BlogArticle(models.Model):
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=100)
-    thumbnail = models.ImageField(upload_to='thumbnails/')  # Assuming you want to store thumbnails as images
+    thumbnail = models.ImageField(upload_to='images/')  # Assuming you want to store thumbnails as images
     article = RichTextUploadingField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.image.name
 
     class Meta:
         ordering = ['-updated', '-created']
@@ -25,3 +27,10 @@ class Popular(models.Model):
 
     def __str__(self):
         return f"{self.article.title} - Views: {self.view_count}"
+    
+# class UploadedImage(models.Model):
+#     image = models.ImageField(upload_to='images/')
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.image.name
