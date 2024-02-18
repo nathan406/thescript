@@ -102,22 +102,22 @@ DATABASES = {
     }
 }
 
-# Your password
-password = "TheScript.2404"
+# # Your password
+# password = "TheScript.2404"
 
-# Percent-encode the password
-encoded_password = quote(password)
+# # Percent-encode the password
+# encoded_password = quote(password)
 
-# Construct the connection string
-connection_string = f"postgres://postgres.gyuxjtoltljhfuguvtlv:{encoded_password}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
+# # Construct the connection string
+# connection_string = f"postgres://postgres.gyuxjtoltljhfuguvtlv:{encoded_password}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
 
-# Set the DATABASE_URL environment variable
-os.environ["DATABASE_URL"] = connection_string
+# # Set the DATABASE_URL environment variable
+# os.environ["DATABASE_URL"] = connection_string
 
-# Use dj_database_url to parse the connection string
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
+# # Use dj_database_url to parse the connection string
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+# }
 
 # DATABASES = {
 #     'default':{
@@ -153,9 +153,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lusaka'
 
 USE_I18N = True
 
@@ -165,17 +165,81 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'assets'
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+# this is where Django *looks for* static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# this is where static files are *collected*
+STATIC_ROOT = BASE_DIR / 'assets'
+
+# this is the *URL* for static files
+STATIC_URL = '/static/'
+
+# ManifestStaticFilesStorage is recommended in production, to prevent outdated
+# JavaScript / CSS assets being served from cache (e.g. after a Django upgrade).
+# See https://docs.djangoproject.com/en/4.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
+# Deprecated in Django 4.2: STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+# New in Django 4.2: https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-STORAGES
+
+# ------ For development
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+#     },
+# }
+
+# ------ For production
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# ------ For development
+
+MEDIA_URL = '/media/'
+
+# ------ For production
+
+# AWS_ACCESS_KEY_ID = 'AKIARS64NUXBYCRUXIZK'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'thescriptbucket'
+# AWS_QUERYSTRING_AUTH = False
+
+# incorporationg Backblaze B2 Cloud Storage
+# ref: https://github.com/jschneier/django-storages/issues/765#issuecomment-699487715
+
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_ACCESS_KEY_ID = "0050bf0f76bf18d0000000002"
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_SECRET_ACCESS_KEY = "K0058/HuAOAQsR0UZPz3sD+JLAidkY0"
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_STORAGE_BUCKET_NAME = "Thscript"
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_QUERYSTRING_AUTH = False
+# DO NOT change these unless you know what you're doing.
+_AWS_EXPIRY = 60 * 60 * 24 * 7
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_S3_OBJECT_PARAMETERS = {"CacheControl": f"max-age={_AWS_EXPIRY}, s-maxage={_AWS_EXPIRY}, must-revalidate"}
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_S3_REGION_NAME = "us-east-005"
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#cloudfront
+AWS_S3_CUSTOM_DOMAIN = "f004.backblazeb2.com/file/Thscript/Thscript"
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_S3_ENDPOINT_URL = "https://Thscript.s3.us-east-005.backblazeb2.com"
+AWS_S3_FILE_OVERWRITE = False
+aws_s3_domain = AWS_S3_CUSTOM_DOMAIN or f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.backblaze.com"
+
+MEDIA_URL = f"https://{aws_s3_domain}/media/"
 
 CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.6.0.min.js'  # or use a local path
 CKEDITOR_UPLOAD_PATH = 'uploads/'  # define the path for uploaded media files
@@ -187,10 +251,3 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'  # define the path for uploaded media files
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-AWS_ACCESS_KEY_ID = 'AKIARS64NUXBYCRUXIZK'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'thescriptbucket'
-AWS_QUERYSTRING_AUTH = False
