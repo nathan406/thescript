@@ -1,14 +1,17 @@
 from pathlib import Path
-import os
 import socket
 import dj_database_url 
 from django.http import HttpRequest
 from urllib.parse import quote
 import mimetypes
-# from google.oauth2 import service_account
-# from storages.backends.s3boto3 import S3Boto3Storage
 
-from storages.backends.s3boto3 import S3Boto3Storage
+import firebase_admin
+from firebase_admin import storage
+from firebase_admin import credentials, initialize_app, storage
+
+import os
+from google.oauth2 import service_account
+
 
 from dotenv import load_dotenv
 
@@ -16,19 +19,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 mimetypes.add_type("text/javascript", ".js", True)
-
-
-
-# ... (existing code)
-
-# Initialize Firebase
-
-
-# Configure the storage bucket
-# FIREBASE_BUCKET = storage.bucket(app=firebase_admin.get_app(name='image_upload_app'))
-
-
-hostname = socket.gethostname()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,23 +31,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3=#&rp*)q1+@5zefhf-@++mr5sq*^84d84oqk%)$yho_-9i%@('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# if hostname == 'localhost' or hostname == '127.0.0.1':
-#     DEBUG = True  # Development environment
-# else:
-#     DEBUG = False  # Production environment
-if os.environ.get('DJANGO_SETTINGS_MODULE') == 'production':
+
+hostname = socket.gethostname()
+
+if hostname in ['localhost','127.0.0.1']:
     DEBUG = False
 else:
     DEBUG = True
-
-
-
-# if HttpRequest().get_host() == 'thescript.onrender.com':
-#     DEBUG = False
-#     ALLOWED_HOSTS = ['thescript.onrender.com']
-# else:
-#     DEBUG = True
-#     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 ALLOWED_HOSTS = ['thescript.onrender.com','127.0.0.1','localhost','www.thscript.site']
@@ -75,7 +55,10 @@ INSTALLED_APPS = [
     'Base',
     'ckeditor',
     'ckeditor_uploader',
+    'livereload',
+    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -113,47 +96,31 @@ WSGI_APPLICATION = 'TheScript.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
-# Your password
-password = "TheScript.2404"
+# Define your password
+password = os.environ['POSTGRES_PASSWORD']
 
 # Percent-encode the password
 encoded_password = quote(password)
 
-# Construct the connection string
+# Construct the connection string for PostgreSQL
 connection_string = f"postgres://postgres.gyuxjtoltljhfuguvtlv:{encoded_password}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
 
-# Set the DATABASE_URL environment variable
+# Set the DATABASE_URL environment variable (for production)
 os.environ["DATABASE_URL"] = connection_string
 
-# Use dj_database_url to parse the connection string
+# Define your local SQLite database configuration
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
-# Set the path to the service account key file
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(BASE_DIR, 'key.json')
-
-
-
-
-
-# DATABASES = {
-#     'default':{
-#         'ENGINE':'django.db.backends.postgresql_psycopg2',
-#         'NAME': "postgres",
-#         'USER': "postgres",
-#         'PASSWORD':"Amtx8CaYDwuhcsRH",
-#         'HOST': "db.gyuxjtoltljhfuguvtlv.supabase.co",
-#         'PORT':"5432"
-#     }
-# }
+# If in production, use PostgreSQL configured via DATABASE_URL
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -174,25 +141,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CACHES = {
+    "default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"},
+    "django-backblaze-b2": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"},
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lusaka'
 
 USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'assets'
-
+BACKBLAZE_CONFIG = {
+    'application_key_id': os.environ['B2_APPLICATION_KEY_ID'],
+    'application_key': os.environ['B2_APPLICATION_KEY'],
+    "bucket": os.environ["BACKBLAZE_BUCKET"],
+}
 
 # Define MEDIA_ROOT and other settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -200,27 +170,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 UPLOAD_ROOT = '/media/upload'
 
 
+# this is where Django *looks for* static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# this is where static files are *collected*
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+# this is the *URL* for static files
+STATIC_URL = '/static/'
+
+DEFAULT_FILE_STORAGE = 'django_backblaze_b2.BackblazeB2Storage'
+
 
 # Backblaze B2 configurations
-AWS_ACCESS_KEY_ID = '0050bf0f76bf18d0000000002'
-AWS_SECRET_ACCESS_KEY = 'K0058/HuAOAQsR0UZPz3sD+JLAidkY0'
-AWS_STORAGE_BUCKET_NAME = 'Thscript'
-
-# Optional configurations
-AWS_S3_REGION_NAME = 'us-east-1'  
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.backblazeb2.com'
-
-# Optional: Set the location within the bucket
-AWS_LOCATION = 'static'
-
-# Static and media URLs
-STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
-
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+
+CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.6.0.min.js'  # or use a local path
+CKEDITOR_UPLOAD_PATH = 'uploads/'  # define the path for uploaded media files
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

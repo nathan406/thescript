@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;900&family=VT323&display=swap');
 
 html{
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  
 }
 
 body{
@@ -58,7 +60,16 @@ main{
 
 main .article {
     width: calc(40vh + 40vw);
+    margin-bottom: calc(5vh + 5vw);
     height: 100vh;
+}
+
+.article .post{
+  margin-top: calc(2vh + 2vh);
+}
+
+main .article .post img{
+  width: 100%;
 }
 
 
@@ -92,6 +103,9 @@ main .article p{
   display: none ;
 }
 
+
+
+
 @media screen and (max-width: 900px){
   .main .article{
     margin-left: calc(3vh + 3vw);
@@ -102,7 +116,18 @@ main .article p{
      main .article{
         margin-left: 0;
         margin-top: calc(5vh + 5vw);
+        width: 100%;
+        padding: calc(2vh + 2vw);
+       
+        /* overflow-x: ; */
+        /* max-width: calc(25vh + 25vw); */
+        /* overflow-x: hidden; */
     }
+    main .article .post img{
+      width: 100%;
+    }
+
+    
     .sidebar{
         display: none;
     }
@@ -146,13 +171,16 @@ main .article p{
 }
 
 
-
-@media screen and (max-width: 500px) {
-    
-    main .article{
-        width: calc(30vh + 30vw);
-    }
+@media screen and (max-width: 500px){
+  main .article  {
+    max-width:calc(40vh + 40vw) ;
+    padding: calc(1vh + 1vw);
+  }
+  main .article .post img{
+    width: 100% !important;
+  }
 }
+
 
 .sidebar .side-articles{
     display: flex;

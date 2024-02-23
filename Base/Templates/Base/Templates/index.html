@@ -15,11 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 
-	<link rel="stylesheet" href="{% static 'Base/css/carousel.css' %}">
+	<!-- <link rel="stylesheet" href="{% static 'Base/css/carousel.css' %}"> -->
 	<link rel="stylesheet" href="{% static 'Base/css/footer.css' %}">
 	<link rel="stylesheet" href="{% static 'Base/css/glitch.css' %}">
 	<link rel="stylesheet" href="{% static 'Base/css/nav.css' %}">
-	<link rel="stylesheet" href="{% static 'Base/css/index.css' %}">
+	<link rel="stylesheet" href="{% static 'Base/css/home.css' %}">
 	<script src="{% static 'Base/JS/carousel.js' %}" defer></script>
 	<script src="{% static 'Base/js/nav.js' %}" defer></script>
 	<title>The Script</title>
@@ -213,13 +213,14 @@
 			</div>
 			
 			<div>
-				<a href="{% url 'tech' %}"></a>
-				<button class="btn">more</button>
+				<a href="{% url 'tech' %}">
+					<button class="btn">more</button>
+				</a>
+				
 			</div>
 			
 		</div>
 
-		
 		<div class="container">
 			<div class="category">
 				<div>
@@ -239,7 +240,7 @@
 							<img src="{{ article.thumbnail.url }}" alt="">
 						</a>
 					</div>
-					<p>{{article.created|timesince}} ago</p>
+					<p>{{article.created|timesince}}ago</p>
 					<a href="{% url 'article' article.pk %}">
 						<h1>
 							{{article.title}}
@@ -248,21 +249,24 @@
 				</div>
 				{% endfor %}
 				
+				
 			</div>
 			
 			<div>
 				<a href="{% url 'cyber' %}">
 					<button class="btn">more</button>
 				</a>
-			
+				
 			</div>
 			
-		</div>
+		</div>		
+		
 		
 		 
 	</div>
 
 	<div class="main desktop ">
+		<div class="container desktop">
 			<div class="category">
 				<div>
 					<h1>Newest</h1>
@@ -342,7 +346,7 @@
 			
 		</div> -->
 
-		<div class="container">
+		<div class="container desktop">
 			<div class="category">
 				<div>
 					<h1>Programming</h1>
@@ -361,36 +365,66 @@
 				{% for article in programming_articles %}
 				<div class="art-container">
 					<div class="article">
+					
 						<a href="{% url 'article' article.pk %}">
 							<img src="{{ article.thumbnail.url }}" alt="">
 						</a>
 					</div>
-					<div>
-						
-						<p>{{article.created|timesince}} ago</p>
-					</div>
-					<div>
-						<a href="{% url 'article' article.pk %}">
-							<h1>
-								{{article.title}}
-							</h1>
-						</a>
-					</div>
-					
+					<p>{{article.created|timesince}} ago</p>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
 				</div>
-				{%endfor%}
-
-				
+				{% endfor %}
 				
 			</div>
 			
-		
+			
 			
 		</div>
 
-		
+		<div class="container desktop">
+			<div class="category">
+				<div>
+					<h1>Tech</h1>
+				</div>
 
-		<div class="container">
+				<div>
+					<a href="{% url 'tech' %}">
+						<button class="btn">more</button>
+					</a>
+					
+				</div>
+				
+			</div>
+
+			<div class="articles">
+				{% for article in tech_articles %}
+				<div class="art-container">
+					<div class="article">
+					
+						<a href="{% url 'article' article.pk %}">
+							<img src="{{ article.thumbnail.url }}" alt="">
+						</a>
+					</div>
+					<p>{{article.created|timesince}} ago</p>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
+				</div>
+				{% endfor %}
+				
+			</div>
+			
+			
+			
+		</div>
+
+		<div class="container desktop" >
 			<div class="category">
 				<div>
 					<h1>Cyber</h1>

@@ -3,7 +3,7 @@
 body{
 	margin: 0;
 	padding: 0;
-	background-color: black;
+	background-color: white;
   animation: bg 10s  infinite;
   transition: bg 5s;
   font-family: 'Source Code Pro', monospace;
@@ -63,13 +63,16 @@ p{
   align-items: center;
   gap: calc(15vh + 15vw);
   margin-left: calc(5vh +5vw) ;
+  margin-top: calc(2vh + 2vw);
 }
 
  .category .btn{
   background-color: red;
-  border-radius: calc(1vh + 1vw);
-  border-width: 2px;
+  border-radius: calc(0.7vh + 0.7vw);
+  border:none;
   color: white;
+  width:calc(3vh + 3vw);
+  padding:calc(0.3vh + 0.3vw)
 }
 
  .articles {
@@ -128,12 +131,18 @@ p{
 
 
 @media screen and (max-width: 500px) {
+
+
     
- 
   .mobile{
     display: contents;
     
   }
+
+  .desktop{
+    display: none ;
+   }
+  
   
   .container{
     margin-top: calc(10vh + 10vw);
@@ -143,17 +152,16 @@ p{
     background-color: red;
     border-radius: calc(1vh + 1vw);
     border:none;
-    margin-left: calc(-15vh + -15vw);
+    margin-right: calc(-15vh + -15vw);
+    color: white;
   }
-  .desktop{
-    display: none;
-  }
+  
   
 }
 
 @media screen and (max-width: 373px) {
   .container .btn{
-    margin-left: calc(-8vh + -8vw);
+    margin-right: calc(-8vh + -8vw);
   }
  
 }

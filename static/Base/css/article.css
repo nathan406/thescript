@@ -4,7 +4,8 @@
 html{
   margin: 0;
   padding: 0;
-  
+  margin-bottom: calc(5vh + 5vw);
+  padding-bottom: calc(5vh + 5vw);
 }
 
 body{
@@ -13,6 +14,8 @@ body{
     background-color: black;
     animation: bg 10s  infinite;
     color: white;
+    margin-bottom: calc(5vh + 5vw);
+    padding-bottom: calc(5vh + 5vw);
     font-family: 'Source Code Pro', monospace;
     /* font-family: 'VT323', monospace; */
     
@@ -32,8 +35,7 @@ body{
   }
 
   h1{
-    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
-    color: white;
+    color: red;
     font-size: calc(1.2vh + 1.2vw);
   }
   p{
@@ -51,8 +53,7 @@ main{
     align-items: center;
     margin-top: calc(0.5vh + 0.5vw);
     /* gap: calc(3vh + 3vw); */
-    margin-bottom: calc(5vh + 5vw);
-    padding-bottom: calc(5vh + 5vw);
+   
     flex-grow: 1; /* Take up remaining vertical space */
     height: 100%; 
 

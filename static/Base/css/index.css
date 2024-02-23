@@ -3,7 +3,7 @@
 body{
 	margin: 0;
 	padding: 0;
-	background-color: black;
+	background-color: white;
   animation: bg 10s  infinite;
   transition: bg 5s;
   font-family: 'Source Code Pro', monospace;
@@ -17,8 +17,8 @@ h1,p{
 }
 
 h1{
-  text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
-  color: white;
+  /* text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red; */
+  color: red;
 }
 
 p{
@@ -66,11 +66,10 @@ p{
 }
 
  .category .btn{
-  background-color: white;
+  background-color: red;
   border-radius: calc(1vh + 1vw);
   border-width: 2px;
-  border-color: red;
-
+  color: white;
 }
 
  .articles {
@@ -141,10 +140,9 @@ p{
   }
 
   .container .btn{
-    background-color: white;
+    background-color: red;
     border-radius: calc(1vh + 1vw);
-    border-width: 2px;
-    border-color: red;
+    border:none;
     margin-left: calc(-15vh + -15vw);
   }
   .desktop{

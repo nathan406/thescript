@@ -19,23 +19,6 @@ import os
 
 # from .forms import ImageUploadForm
 
-# def upload_image(request):
-#     if request.method == 'POST':
-#         form = ImageUploadForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('upload_success')
-#     else:
-#         form = ImageUploadForm()
-#     return render(request, 'upload_image.html', {'form': form})
-    
-# def upload_image_to_firebase(file_path, destination_path):
-#     # Access the storage object directly
-#     bucket = storage.bucket()
-
-#     # Upload the file
-#     blob = bucket.blob(destination_path)
-#     blob.upload_from_filename(file_path)
 
 def index(request):
     # Mobile

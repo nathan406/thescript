@@ -67,9 +67,11 @@
 						
 					</div>
 					<p>{{article.created|timesince}} ago</p>
-					<h1>
-						{{article.title}}
-					</h1>
+					<a href="{% url 'article' article.pk %}">
+						<h1>
+							{{article.title}}
+						</h1>
+					</a>
 				</div>
 				{% endfor %}
 			</div>
