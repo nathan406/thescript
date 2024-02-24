@@ -37,7 +37,7 @@ hostname = socket.gethostname()
 if hostname in ['localhost','127.0.0.1']:
     DEBUG = False
 else:
-    DEBUG = True
+    DEBUG = False
 
 
 ALLOWED_HOSTS = ['thescript.onrender.com','127.0.0.1','localhost','www.thscript.site']
@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'TheScript.wsgi.application'
 
 
 # Define your password
-password = os.environ['POSTGRES_PASSWORD']
+password = os.environ.get('POSTGRES_PASSWORD')
 
 # Percent-encode the password
 encoded_password = quote(password)
@@ -159,9 +159,9 @@ USE_I18N = True
 USE_TZ = True
 
 BACKBLAZE_CONFIG = {
-    'application_key_id': os.environ['B2_APPLICATION_KEY_ID'],
-    'application_key': os.environ['B2_APPLICATION_KEY'],
-    "bucket": os.environ["BACKBLAZE_BUCKET"],
+    'application_key_id': os.environ.get('B2_APPLICATION_KEY_ID'),
+    'application_key': os.environ.get('B2_APPLICATION_KEY'),
+    "bucket": os.environ.get("BACKBLAZE_BUCKET"),
 }
 
 # Define MEDIA_ROOT and other settings
