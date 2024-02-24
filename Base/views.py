@@ -2,18 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from .models import BlogArticle, Popular
 
 from django.http import HttpResponse
-import threading
-import pyrebase
-import environ
-
-import firebase_admin
 from firebase_admin import storage
-
-# Initialize Firebase app
-# firebase_admin.initialize_app()
-
-# from django.core.files.storage import default_storage
-# from django.core.files.base import ContentFile
 
 import os
 
