@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'TheScript.wsgi.application'
 password = os.environ.get('POSTGRES_PASSWORD')
 
 # Percent-encode the password
-encoded_password = quote(password)
+encoded_password = quote(password.encode())
 
 # Construct the connection string for PostgreSQL
 connection_string = f"postgres://postgres.gyuxjtoltljhfuguvtlv:{encoded_password}@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
