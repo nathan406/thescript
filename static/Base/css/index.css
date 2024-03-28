@@ -25,7 +25,7 @@ p{
   color: gray;
 }
 
-@keyframes bg {
+/* @keyframes bg {
   0% {
     background-color: rgb(63, 56, 56);
   }
@@ -33,7 +33,7 @@ p{
   100%{
     background-color: black;
   }
-}
+} */
 
 
   .main{
